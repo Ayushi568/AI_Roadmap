@@ -1,0 +1,467 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Developer Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--bg2:#111118;--bg3:#16161f;--bg4:#1c1c27;--border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);--text:#e8e8f0;--muted:#6b6b80;--muted2:#9999aa;--accent:#7c6aff;--accent2:#a78bfa;--green:#34d399;--r:10px;--r-lg:16px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+.hero{position:relative;padding:90px 24px 60px;text-align:center;overflow:hidden}
+.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(124,106,255,0.18) 0%,transparent 70%);pointer-events:none}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--accent2);text-transform:uppercase;margin-bottom:20px;display:inline-flex;align-items:center;gap:8px}
+.eyebrow::before,.eyebrow::after{content:'';width:24px;height:1px;background:var(--accent2);opacity:.5}
+h1{font-family:'Syne',sans-serif;font-size:clamp(36px,7vw,72px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:18px}
+h1 span{color:var(--accent2)}
+.hero-sub{font-size:15px;color:var(--muted2);max-width:500px;margin:0 auto 36px;line-height:1.7}
+.prog-wrap{max-width:460px;margin:0 auto 44px;background:var(--bg3);border:.5px solid var(--border);border-radius:99px;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.prog-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);white-space:nowrap}
+.prog-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s;width:0%}
+.prog-pct{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent2);min-width:30px;text-align:right}
+.stats{display:flex;max-width:580px;margin:0 auto 56px;border:.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.stat{flex:1;padding:16px;text-align:center;border-right:.5px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1;margin-bottom:3px}
+.stat-l{font-size:11px;color:var(--muted)}
+.main{max-width:860px;margin:0 auto;padding:0 20px 80px;position:relative;z-index:1}
+.legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted2)}
+.leg-d{width:7px;height:7px;border-radius:2px}
+.tl{position:relative}
+.tl::before{content:'';position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 5%,var(--border) 95%,transparent)}
+.phase{position:relative;margin-bottom:10px;padding-left:52px;animation:fu .5s ease both}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.phase:nth-child(1){animation-delay:.04s}.phase:nth-child(2){animation-delay:.08s}.phase:nth-child(3){animation-delay:.12s}.phase:nth-child(4){animation-delay:.16s}.phase:nth-child(5){animation-delay:.20s}.phase:nth-child(6){animation-delay:.24s}.phase:nth-child(7){animation-delay:.28s}.phase:nth-child(8){animation-delay:.32s}
+.pdot{position:absolute;left:11px;top:19px;width:16px;height:16px;border-radius:50%;border:2px solid var(--bg);z-index:2;transition:transform .2s}
+.phase.open .pdot{transform:scale(1.2)}
+.pcard{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:border-color .2s}
+.pcard:hover{border-color:var(--border-h)}
+.phase.open .pcard{border-color:var(--border-h)}
+.ph{padding:14px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.ph:hover{background:rgba(255,255,255,.02)}
+.ph-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:22px}
+.ph-badge{font-size:10px;font-weight:600;letter-spacing:.05em;padding:2px 9px;border-radius:99px;text-transform:uppercase;flex-shrink:0}
+.ph-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:#fff;flex:1;min-width:0}
+.ph-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap}
+.done-btn{font-size:10px;padding:2px 9px;cursor:pointer;border-radius:99px;background:none;border:.5px solid var(--border-h);color:var(--muted2);white-space:nowrap;transition:all .2s;font-family:'Instrument Sans',sans-serif}
+.done-btn:hover{border-color:var(--green);color:var(--green)}
+.done-btn.done{background:rgba(52,211,153,.1);border-color:var(--green);color:var(--green)}
+.chev{font-size:10px;color:var(--muted);transition:transform .25s}
+.phase.open .chev{transform:rotate(180deg)}
+.pbody{display:none;padding:0 18px 18px;flex-direction:column;gap:8px}
+.phase.open .pbody{display:flex}
+.step{background:var(--bg3);border:.5px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
+.step:hover{border-color:var(--border-h)}
+.step-main{padding:13px 14px}
+.sh{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.snum{font-family:'DM Mono',monospace;font-size:11px;width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.stitle{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#fff}
+.sdesc{font-size:12px;color:var(--muted2);line-height:1.65;margin-bottom:9px;padding-left:31px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;padding-left:31px;margin-bottom:7px}
+.tag{font-size:10px;padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace}
+.tag.tool{background:rgba(124,106,255,.12);color:#a78bfa;border:.5px solid rgba(124,106,255,.2)}
+.tag.concept{background:rgba(34,211,238,.08);color:#67e8f9;border:.5px solid rgba(34,211,238,.15)}
+.tag.cert{background:rgba(251,191,36,.08);color:#fcd34d;border:.5px solid rgba(251,191,36,.15)}
+.tag.project{background:rgba(52,211,153,.08);color:#6ee7b7;border:.5px solid rgba(52,211,153,.15)}
+.links-s{padding-left:31px;display:flex;flex-direction:column;gap:3px;margin-top:3px}
+.lr{display:flex;align-items:baseline;gap:7px}
+.lt{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:44px;text-transform:uppercase;letter-spacing:.07em}
+.lr a{font-size:11px;color:var(--accent2);text-decoration:none;transition:color .15s}
+.lr a:hover{color:#fff;text-decoration:underline}
+/* Study plan */
+.sp-toggle{margin:10px 14px 0;padding:7px 11px;background:var(--bg4);border:.5px solid var(--border);border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:border-color .2s}
+.sp-toggle:hover{border-color:var(--border-h)}
+.sp-toggle.open .sp-chev{transform:rotate(180deg)}
+.sp-toggle-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:.07em;text-transform:uppercase}
+.sp-chev{font-size:10px;color:var(--muted);transition:transform .25s}
+.sp-body{display:none;padding:0 14px 14px}
+.sp-body.open{display:block}
+.sp-inner{background:var(--bg4);border:.5px solid var(--border);border-radius:9px;overflow:hidden;margin-top:0}
+.sp-week{border-bottom:.5px solid var(--border)}
+.sp-week:last-child{border-bottom:none}
+.sp-wh{padding:9px 13px;display:flex;align-items:center;gap:9px}
+.sp-wl{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;min-width:50px;flex-shrink:0}
+.sp-wt{font-size:12px;font-weight:500;color:var(--text)}
+.sp-wb{padding:0 13px 10px;display:flex;flex-direction:column;gap:5px}
+.sp-day{display:flex;gap:9px;align-items:flex-start}
+.sp-dl{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:54px;flex-shrink:0;padding-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.sp-dc{font-size:12px;color:var(--muted2);line-height:1.6}
+.sp-dc strong{color:var(--text);font-weight:500}
+.sp-tip{margin:6px 13px 10px;padding:7px 11px;background:rgba(124,106,255,.07);border:.5px solid rgba(124,106,255,.15);border-radius:7px;font-size:11px;color:var(--muted2);line-height:1.6}
+.sp-tip strong{color:var(--accent2)}
+footer{text-align:center;padding:36px 24px;border-top:.5px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:99px}
+@media(max-width:580px){.tl::before,.pdot{display:none}.phase{padding-left:0}.ph-time{display:none}.stats{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="eyebrow">Complete Learning Path</div>
+  <h1>Become an<br><span>AI Developer</span></h1>
+  <p class="hero-sub">8 phases · 15 steps · weekly study plans · certifications · real-world projects. Everything in one place.</p>
+  <div class="prog-wrap">
+    <span class="prog-label">Progress</span>
+    <div class="prog-track"><div class="prog-fill" id="pfill"></div></div>
+    <span class="prog-pct" id="ppct">0%</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">Phases</div></div>
+    <div class="stat"><div class="stat-n">15</div><div class="stat-l">Steps</div></div>
+    <div class="stat"><div class="stat-n">24+</div><div class="stat-l">Certifications</div></div>
+    <div class="stat"><div class="stat-n">18+</div><div class="stat-l">Projects</div></div>
+  </div>
+</div>
+<div class="main">
+  <div class="legend">
+    <div class="leg"><div class="leg-d" style="background:#a78bfa"></div>Tools</div>
+    <div class="leg"><div class="leg-d" style="background:#67e8f9"></div>Concepts</div>
+    <div class="leg"><div class="leg-d" style="background:#fcd34d"></div>Certifications</div>
+    <div class="leg"><div class="leg-d" style="background:#6ee7b7"></div>Projects</div>
+  </div>
+  <div class="tl" id="phases"></div>
+</div>
+<footer>AI Developer Roadmap &nbsp;·&nbsp; All cert links are official or free &nbsp;·&nbsp; 2025</footer>
+<script>
+const D=[
+ {title:"Python & ML Foundations",time:"4–6 wks",badge:"Start Here",dot:"#7c6aff",bb:"rgba(124,106,255,.12)",bc:"#a78bfa",steps:[
+  {n:"01",title:"Python for Data & AI",desc:"Master Python: NumPy, Pandas, Matplotlib. List comprehensions, generators, decorators, and clean modular code. The base layer for everything.",
+   tools:["Python","NumPy","Pandas","Matplotlib","Jupyter"],concepts:["Data structures","Vectorisation","OOP","Feature Engineering"],
+   certs:[{l:"Google — Python Crash Course (Coursera)",u:"https://www.coursera.org/learn/python-crash-course"},{l:"Kaggle — Pandas (free)",u:"https://www.kaggle.com/learn/pandas"}],
+   projects:[{l:"Full EDA on a Kaggle dataset",u:"https://www.kaggle.com/learn/pandas"}],
+   sp:[
+    {w:"Week 1",t:"Python core & environment",days:[
+     {d:"Mon–Tue",c:"<strong>Setup & basics:</strong> Install Python + VS Code + Jupyter. Variables, types, loops, functions, list/dict comprehensions."},
+     {d:"Wed–Thu",c:"<strong>OOP & modules:</strong> Classes, inheritance, decorators, generators. Write a reusable data-loading utility class."},
+     {d:"Fri–Sun",c:"<strong>NumPy:</strong> Arrays, broadcasting, indexing, vectorised operations. Complete Kaggle NumPy exercises."}],
+     tip:"<strong>Tip:</strong> Code every day, even 30 min. Jupyter notebooks give instant output — build confidence fast."},
+    {w:"Week 2",t:"Pandas & data manipulation",days:[
+     {d:"Mon–Tue",c:"<strong>Pandas basics:</strong> DataFrames, read_csv, head/tail, describe. Load the Titanic dataset."},
+     {d:"Wed–Thu",c:"<strong>Data cleaning:</strong> Handle nulls, dtype conversion, string ops, apply/map, groupby aggregations."},
+     {d:"Fri–Sun",c:"<strong>Visualisation:</strong> Matplotlib & Seaborn — histograms, scatter plots, correlation heatmaps. Full EDA notebook."}],
+     tip:"<strong>Goal:</strong> By end of week 2, load, clean, and visualise any CSV confidently."},
+    {w:"Week 3",t:"Feature Engineering & pipeline",days:[
+     {d:"Mon–Tue",c:"<strong>Feature Engineering:</strong> Encoding categoricals, normalisation, log transforms, interaction features."},
+     {d:"Wed–Thu",c:"<strong>Scikit-learn intro:</strong> Train/test split, Pipeline, ColumnTransformer. Fit a simple LinearRegression."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Full EDA + feature engineering notebook on a dataset of your choice. Submit to Kaggle."}],
+     tip:"<strong>Tip:</strong> Feature Engineering is underrated. Most ML performance gains come from better features, not fancier models."}
+   ]},
+  {n:"02",title:"Machine Learning Core",desc:"Supervised & unsupervised ML: regression, classification, clustering, trees, ensembles. Bias-variance, cross-validation, feature engineering with Scikit-learn.",
+   tools:["Scikit-learn","XGBoost","Pandas","Matplotlib","LightGBM"],concepts:["Feature Engineering","Cross-validation","Bias-variance","Model evaluation","Ensemble methods"],
+   certs:[{l:"Andrew Ng — ML Specialization (Coursera)",u:"https://www.coursera.org/specializations/machine-learning-introduction"},{l:"Kaggle — ML Intro (free)",u:"https://www.kaggle.com/learn/intro-to-machine-learning"}],
+   projects:[{l:"Titanic survival predictor (Kaggle)",u:"https://www.kaggle.com/competitions/titanic"},{l:"House price regression (Kaggle)",u:"https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques"}],
+   sp:[
+    {w:"Week 1",t:"Supervised learning",days:[
+     {d:"Mon–Tue",c:"<strong>Linear & logistic regression:</strong> Understand gradient descent and cost functions. Implement in NumPy, then use Scikit-learn."},
+     {d:"Wed–Thu",c:"<strong>Trees & forests:</strong> Gini/entropy splits, Random Forest. Train a classifier on Titanic data."},
+     {d:"Fri–Sun",c:"<strong>Model evaluation:</strong> Accuracy, precision, recall, F1, ROC-AUC, confusion matrix. Know when each matters."}],
+     tip:"<strong>Tip:</strong> Take Andrew Ng's ML Specialization in parallel. Week 1 of the course aligns perfectly."},
+    {w:"Week 2",t:"Ensembles & tuning",days:[
+     {d:"Mon–Tue",c:"<strong>Gradient boosting:</strong> XGBoost and LightGBM. Understand how boosting differs from bagging."},
+     {d:"Wed–Thu",c:"<strong>Cross-validation & tuning:</strong> k-fold CV, GridSearchCV, RandomizedSearchCV. Tune your XGBoost model."},
+     {d:"Fri–Sun",c:"<strong>Bias-variance:</strong> Learning curves, regularisation (L1/L2). Apply to house price regression. Aim for top 20% leaderboard."}],
+     tip:"<strong>Goal:</strong> Top 20% on Kaggle House Prices using only Scikit-learn + XGBoost."},
+    {w:"Week 3",t:"Unsupervised & pipelines",days:[
+     {d:"Mon–Tue",c:"<strong>Clustering:</strong> K-Means, DBSCAN, silhouette score. Cluster a customer dataset."},
+     {d:"Wed–Thu",c:"<strong>Dimensionality reduction:</strong> PCA, t-SNE, UMAP. Visualise high-dimensional data in 2D."},
+     {d:"Fri–Sun",c:"<strong>Full ML Pipeline:</strong> Scikit-learn Pipeline with preprocessing + model. Save with joblib. Write a prediction script."}],
+     tip:"<strong>Tip:</strong> Pipelines are production-essential. Every ML project from now on should use one."}
+   ]}
+ ]},
+ {title:"Deep Learning & Neural Networks",time:"5–7 wks",badge:"Core AI",dot:"#22d3ee",bb:"rgba(34,211,238,.1)",bc:"#67e8f9",steps:[
+  {n:"03",title:"Neural Networks from Scratch",desc:"Forward/backward pass, activation functions, optimisers (SGD, Adam), batch norm, dropout. Build in NumPy first, then PyTorch and TensorFlow.",
+   tools:["PyTorch","TensorFlow","Keras","NumPy"],concepts:["Backpropagation","Activation functions","Regularisation","Optimisers","Batch normalisation"],
+   certs:[{l:"fast.ai — Practical Deep Learning (free)",u:"https://course.fast.ai"},{l:"Deep Learning Specialization — Coursera",u:"https://www.coursera.org/specializations/deep-learning"}],
+   projects:[{l:"MNIST digit classifier (PyTorch official tutorial)",u:"https://pytorch.org/tutorials/beginner/basics/intro.html"}],
+   sp:[
+    {w:"Week 1",t:"Math & first neural network",days:[
+     {d:"Mon–Tue",c:"<strong>Math review:</strong> Matrix multiply, dot product, chain rule. Watch 3Blue1Brown 'Neural Networks' YouTube series (4 videos)."},
+     {d:"Wed–Thu",c:"<strong>Backprop from scratch:</strong> Build a 2-layer net in pure NumPy. Forward pass, MSE loss, backprop, gradient descent update."},
+     {d:"Fri–Sun",c:"<strong>PyTorch basics:</strong> Tensors, autograd, nn.Module, DataLoader. Re-implement your NumPy net in PyTorch."}],
+     tip:"<strong>Tip:</strong> Building backprop from scratch once is worth a week of reading. You will never fear the math again."},
+    {w:"Week 2",t:"Activation, regularisation & optimisers",days:[
+     {d:"Mon–Tue",c:"<strong>Activation functions:</strong> ReLU, sigmoid, tanh, GELU. Understand dying ReLU. Compare on MNIST."},
+     {d:"Wed–Thu",c:"<strong>Regularisation:</strong> Dropout, weight decay, batch normalisation. Add to MNIST model and observe generalisation improvement."},
+     {d:"Fri–Sun",c:"<strong>Optimisers:</strong> SGD, Momentum, Adam, AdamW. Plot loss curves with different optimisers on the same task."}],
+     tip:"<strong>Goal:</strong> >99% accuracy on MNIST with a 3-layer MLP. Anything less means something is wrong."},
+    {w:"Week 3",t:"TensorFlow & training patterns",days:[
+     {d:"Mon–Tue",c:"<strong>TensorFlow/Keras:</strong> Sequential API, functional API, model.fit, EarlyStopping, ModelCheckpoint callbacks."},
+     {d:"Wed–Thu",c:"<strong>Custom training loops:</strong> Write a PyTorch training loop from scratch. Add gradient clipping and learning rate scheduling."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Train a net on a dataset of your choice (not MNIST). Log metrics to W&B. Save the best checkpoint."}],
+     tip:"<strong>Tip:</strong> Get comfortable in both PyTorch and TensorFlow. Industry uses PyTorch; many tutorials use Keras."}
+   ]},
+  {n:"04",title:"CNNs, RNNs & Sequence Models",desc:"Convolutional networks for vision, recurrent nets and LSTMs for sequences. Learn when each architecture fits. Vanishing gradients and gated architectures.",
+   tools:["PyTorch","TensorFlow","torchvision","torchtext"],concepts:["Convolution","Pooling","LSTM","Vanishing gradient","Seq2Seq"],
+   certs:[{l:"Stanford CS231n — CNN for Visual Recognition (free)",u:"https://cs231n.stanford.edu"}],
+   projects:[{l:"Image classifier on CIFAR-10 (PyTorch)",u:"https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html"}],
+   sp:[
+    {w:"Week 1",t:"Convolutional Neural Networks",days:[
+     {d:"Mon–Tue",c:"<strong>CNN theory:</strong> Convolution, stride, padding, receptive field, pooling. Watch Stanford CS231n lecture 5."},
+     {d:"Wed–Thu",c:"<strong>Build a CNN:</strong> Implement LeNet-style CNN in PyTorch for CIFAR-10. Understand how filters learn edge and texture detectors."},
+     {d:"Fri–Sun",c:"<strong>Transfer learning:</strong> Fine-tune ResNet-18 on a custom image dataset. Freeze all but the final layer. This is the real-world workflow."}],
+     tip:"<strong>Tip:</strong> Transfer learning is the default in 2025. You almost never train a CNN from scratch."},
+    {w:"Week 2",t:"RNNs & sequence models",days:[
+     {d:"Mon–Tue",c:"<strong>RNN fundamentals:</strong> Unrolling through time, vanishing/exploding gradients, BPTT. Implement a simple RNN in PyTorch."},
+     {d:"Wed–Thu",c:"<strong>LSTMs & GRUs:</strong> Understand gate mechanics (forget, input, output gates). Train an LSTM for next-word prediction."},
+     {d:"Fri–Sun",c:"<strong>Seq2Seq:</strong> Encoder-decoder architecture. Build a character-level seq2seq model for name transliteration."}],
+     tip:"<strong>Goal:</strong> Explain WHY LSTMs solve vanishing gradients. If you can explain it clearly, you have got it."}
+   ]}
+ ]},
+ {title:"NLP & Transformers",time:"4–6 wks",badge:"LLM Foundation",dot:"#fb7185",bb:"rgba(251,113,133,.1)",bc:"#fda4af",steps:[
+  {n:"05",title:"NLP Fundamentals",desc:"Tokenisation, stemming, TF-IDF, word embeddings (Word2Vec, GloVe). How text becomes numbers. Named entity recognition and text classification pipelines.",
+   tools:["NLTK","spaCy","Gensim","HF Tokenizers"],concepts:["NLP","Tokenization","Embeddings","TF-IDF","Named Entity Recognition"],
+   certs:[{l:"Hugging Face — NLP Course (free)",u:"https://huggingface.co/learn/nlp-course"}],
+   projects:[{l:"Sentiment analysis pipeline on Twitter data",u:"https://huggingface.co/learn/nlp-course/chapter3"}],
+   sp:[
+    {w:"Week 1",t:"Text preprocessing & classical NLP",days:[
+     {d:"Mon–Tue",c:"<strong>Text cleaning:</strong> Tokenisation, stopword removal, stemming, lemmatisation with NLTK and spaCy. Build a reusable text pipeline."},
+     {d:"Wed–Thu",c:"<strong>TF-IDF classifier:</strong> Vectorise a corpus. Train a logistic regression classifier for sentiment. Evaluate with F1."},
+     {d:"Fri–Sun",c:"<strong>spaCy NLP pipeline:</strong> NER, POS tagging, dependency parsing. Build an information extraction pipeline."}],
+     tip:"<strong>Tip:</strong> Classical NLP (TF-IDF + logistic regression) is still useful for many production tasks and very fast to ship."},
+    {w:"Week 2",t:"Word embeddings & semantic similarity",days:[
+     {d:"Mon–Tue",c:"<strong>Word2Vec & GloVe:</strong> Understand skip-gram and CBOW. Load pre-trained GloVe vectors. Find nearest neighbours and analogies."},
+     {d:"Wed–Thu",c:"<strong>Sentence embeddings:</strong> Use sentence-transformers. Build a semantic search engine over product descriptions."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> End-to-end Twitter sentiment classifier. Preprocessing → TF-IDF + Word2Vec → XGBoost. Deploy as a Flask endpoint."}],
+     tip:"<strong>Goal:</strong> Understand the difference between TF-IDF (sparse, exact) and embeddings (dense, semantic). Both matter in production."}
+   ]},
+  {n:"06",title:"Transformers & LLMs",desc:"Read 'Attention Is All You Need'. Multi-head attention, positional encoding, encoder-decoder. Fine-tune BERT/GPT on custom tasks. How LLMs are actually trained.",
+   tools:["Transformers (HF)","PyTorch","Datasets (HF)","Accelerate"],concepts:["Transformers","Attention mechanism","LLM","Pre-training","Fine-tuning","RLHF","Positional encoding"],
+   certs:[{l:"Hugging Face — Transformers Course (free)",u:"https://huggingface.co/learn/nlp-course/chapter1"},{l:"DeepLearning.AI — LLMs with Python (free)",u:"https://www.deeplearning.ai/short-courses/"}],
+   projects:[{l:"Fine-tune BERT for text classification (HF docs)",u:"https://huggingface.co/docs/transformers/training"}],
+   sp:[
+    {w:"Week 1",t:"Transformer architecture deep dive",days:[
+     {d:"Mon–Tue",c:"<strong>Read the paper:</strong> 'Attention Is All You Need' (Vaswani et al., 2017). Sketch the architecture. Understand Q, K, V matrices and why they work."},
+     {d:"Wed–Thu",c:"<strong>Implement attention:</strong> Code scaled dot-product attention in PyTorch from scratch. Then multi-head attention. Verify shapes match the paper."},
+     {d:"Fri–Sun",c:"<strong>Hugging Face basics:</strong> AutoModel, AutoTokenizer, pipeline() for inference. Run BERT, GPT-2, T5 on text classification, generation, summarisation."}],
+     tip:"<strong>Tip:</strong> The Annotated Transformer (Harvard NLP blog) is the best visual walkthrough of the architecture. Bookmark it."},
+    {w:"Week 2",t:"Fine-tuning & LLM concepts",days:[
+     {d:"Mon–Tue",c:"<strong>Fine-tune BERT:</strong> Load bert-base-uncased, add classification head, fine-tune on SST-2 sentiment dataset. Track loss with W&B."},
+     {d:"Wed–Thu",c:"<strong>LLM training:</strong> Pre-training (masked LM, causal LM), instruction tuning, RLHF. Watch Andrej Karpathy's 'Let's build GPT' video (YouTube)."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Fine-tune DistilBERT on your own text classification task (e.g. support ticket categorisation). Push to Hugging Face Hub."}],
+     tip:"<strong>Goal:</strong> After this step you should be able to take ANY Hugging Face model and fine-tune it on a custom task."}
+   ]}
+ ]},
+ {title:"Prompt Engineering & RAG",time:"3–4 wks",badge:"GenAI Core",dot:"#34d399",bb:"rgba(52,211,153,.1)",bc:"#6ee7b7",steps:[
+  {n:"07",title:"Prompt Engineering",desc:"Zero-shot, few-shot, chain-of-thought, ReAct prompting. System prompts, structured output, JSON mode. Build eval loops to measure and improve prompt quality.",
+   tools:["OpenAI API","Anthropic API","PromptFoo","LangSmith"],concepts:["Prompt Engineering","Chain-of-thought","Few-shot","Hallucination detection","Eval metrics","Structured output"],
+   certs:[{l:"DeepLearning.AI — Prompt Engineering (free)",u:"https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/"},{l:"Anthropic — Prompt Engineering Guide (free)",u:"https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"}],
+   projects:[{l:"Build a prompt eval harness (Anthropic docs)",u:"https://docs.anthropic.com/en/docs/test-and-evaluate"}],
+   sp:[
+    {w:"Week 1",t:"Prompting techniques",days:[
+     {d:"Mon–Tue",c:"<strong>API basics:</strong> Set up OpenAI & Anthropic API keys. Call APIs directly in Python. Understand temperature, max_tokens, system/user/assistant roles."},
+     {d:"Wed–Thu",c:"<strong>Prompting patterns:</strong> Zero-shot → few-shot → chain-of-thought. Build a classifier, summariser, and information extractor with each technique."},
+     {d:"Fri–Sun",c:"<strong>Structured output:</strong> JSON mode, function calling, output parsers. Build an API that extracts structured data from unstructured free text."}],
+     tip:"<strong>Tip:</strong> Prompt engineering is more science than art. Treat it like A/B testing — change one thing at a time and measure."},
+    {w:"Week 2",t:"Evals & prompt iteration",days:[
+     {d:"Mon–Tue",c:"<strong>Hallucination detection:</strong> Build a simple eval that checks model output against ground truth. Measure precision/recall on a test set."},
+     {d:"Wed–Thu",c:"<strong>PromptFoo:</strong> Set up automated prompt testing. Compare 3 prompt variants on the same task. Pick the winner by metrics, not gut feeling."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Production-ready prompt for a real-world task (e.g. customer support triage). Write 20 test cases. Achieve >90% accuracy."}],
+     tip:"<strong>Goal:</strong> Build an eval harness before building the product. You cannot improve what you do not measure."}
+   ]},
+  {n:"08",title:"Vector Databases & RAG",desc:"Embed documents, store in a vector DB, retrieve by semantic similarity, inject context into the prompt. Chunking, reranking, hybrid search, RAG evaluation.",
+   tools:["LangChain","LlamaIndex","Pinecone","Chroma","FAISS","OpenAI Embeddings","Weaviate"],concepts:["RAG","Vector Databases","Semantic search","Chunking","Reranking","Hybrid search","RAGAS"],
+   certs:[{l:"DeepLearning.AI — Building & Evaluating RAG (free)",u:"https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/"},{l:"LangChain Academy (free)",u:"https://academy.langchain.com"}],
+   projects:[{l:"Q&A chatbot over your own PDFs",u:"https://python.langchain.com/docs/tutorials/rag/"},{l:"Code search over a GitHub repo",u:"https://docs.llamaindex.ai/en/stable/examples/"}],
+   sp:[
+    {w:"Week 1",t:"Embeddings & vector stores",days:[
+     {d:"Mon–Tue",c:"<strong>Embeddings deep dive:</strong> What they are, cosine similarity, why semantic search beats keyword search. Embed 100 sentences and visualise with t-SNE."},
+     {d:"Wed–Thu",c:"<strong>Vector databases:</strong> Set up ChromaDB locally. Index 500 document chunks. Query by semantic similarity. Compare Chroma vs FAISS vs Pinecone."},
+     {d:"Fri–Sun",c:"<strong>Chunking strategies:</strong> Fixed-size, sentence, recursive, semantic chunking. Experiment with chunk size and overlap on a 50-page PDF."}],
+     tip:"<strong>Tip:</strong> Chunking strategy is the #1 lever in RAG quality. Spend real time here before worrying about the LLM."},
+    {w:"Week 2",t:"Full RAG pipeline & evaluation",days:[
+     {d:"Mon–Tue",c:"<strong>LangChain RAG:</strong> Complete pipeline — load PDF, chunk, embed, store in Chroma, retrieve top-k, inject into prompt, stream response."},
+     {d:"Wed–Thu",c:"<strong>Advanced RAG:</strong> Add a reranker (Cohere or cross-encoder). Try HyDE (Hypothetical Document Embeddings). Implement hybrid BM25 + vector search."},
+     {d:"Fri–Sun",c:"<strong>RAG evaluation:</strong> Use RAGAS to measure faithfulness, context precision, context recall. Build a test set of 50 Q&A pairs with ground-truth answers."}],
+     tip:"<strong>Goal:</strong> A working RAG pipeline evaluated with RAGAS, scoring >0.8 faithfulness. This is your first real portfolio project."}
+   ]}
+ ]},
+ {title:"Agents & LangChain",time:"3–4 wks",badge:"Advanced GenAI",dot:"#fbbf24",bb:"rgba(251,191,36,.1)",bc:"#fcd34d",steps:[
+  {n:"09",title:"LangChain, LangGraph & Agents",desc:"Build chains, agents, and memory-aware pipelines. Tool use, function calling, multi-step reasoning loops (ReAct, Plan-and-Execute). Multi-agent systems with LangGraph.",
+   tools:["LangChain","LangGraph","OpenAI Function Calling","Claude Tool Use","CrewAI","AutoGen"],concepts:["Agents","Tool use","ReAct loop","Task decomposition","Multi-agent systems","Agent memory"],
+   certs:[{l:"LangChain Academy — LangGraph (free)",u:"https://academy.langchain.com/courses/intro-to-langgraph"},{l:"DeepLearning.AI — Building Agentic RAG (free)",u:"https://www.deeplearning.ai/short-courses/building-agentic-rag-with-llamaindex/"}],
+   projects:[{l:"Research agent — web search + summarise",u:"https://python.langchain.com/docs/tutorials/agents/"},{l:"Code writing & execution agent",u:"https://docs.anthropic.com/en/docs/agents-and-tools"}],
+   sp:[
+    {w:"Week 1",t:"Tool use & basic agents",days:[
+     {d:"Mon–Tue",c:"<strong>Function calling:</strong> Give an LLM tools (calculator, web search, code executor). Understand JSON schema for tools and how the model decides when to call one."},
+     {d:"Wed–Thu",c:"<strong>ReAct agents:</strong> Build a ReAct agent in LangChain with at least 3 tools. Trace the think → act → observe loop with LangSmith."},
+     {d:"Fri–Sun",c:"<strong>Agent memory:</strong> Add conversation buffer memory, entity memory, and summary memory. Test with multi-turn conversations."}],
+     tip:"<strong>Tip:</strong> Always trace agents with LangSmith from day one. Debugging an agent without traces is nearly impossible."},
+    {w:"Week 2",t:"LangGraph & multi-agent systems",days:[
+     {d:"Mon–Tue",c:"<strong>LangGraph basics:</strong> Nodes, edges, state, conditional routing. Build a 3-node graph: planner → executor → reviewer."},
+     {d:"Wed–Thu",c:"<strong>Multi-agent with CrewAI:</strong> A researcher agent + a writer agent that collaborate to produce a full research report."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Fully autonomous research agent — takes a question, searches the web, reads pages, synthesises an answer with citations."}],
+     tip:"<strong>Goal:</strong> Your agent project is the most impressive portfolio item at this stage. Polish it and put it on GitHub."}
+   ]}
+ ]},
+ {title:"Model Training & Deployment",time:"5–6 wks",badge:"Production",dot:"#f472b6",bb:"rgba(244,114,182,.1)",bc:"#f9a8d4",steps:[
+  {n:"10",title:"Fine-tuning & Model Training",desc:"Fine-tune open-source models (Llama 3, Mistral) with LoRA/QLoRA. Dataset curation, training loops, PEFT methods, and when fine-tuning beats prompt engineering.",
+   tools:["PyTorch","Hugging Face","LoRA / QLoRA","Axolotl","W&B","PEFT","TRL"],concepts:["Model Training","LoRA","PEFT","Dataset curation","Distributed training","RLHF","Instruction tuning"],
+   certs:[{l:"Hugging Face — Fine-tuning LLMs (free)",u:"https://huggingface.co/learn/nlp-course/chapter3"},{l:"W&B MLOps Course (free)",u:"https://www.wandb.courses/courses/mlops-zoomcamp"}],
+   projects:[{l:"Fine-tune Llama 3 on custom Q&A data (HF TRL)",u:"https://huggingface.co/docs/trl/sft_trainer"}],
+   sp:[
+    {w:"Week 1",t:"LoRA & PEFT methods",days:[
+     {d:"Mon–Tue",c:"<strong>LoRA theory:</strong> Why full fine-tuning is expensive. How LoRA injects low-rank matrices. Read the LoRA paper (Hu et al., 2021). Understand rank and alpha parameters."},
+     {d:"Wed–Thu",c:"<strong>QLoRA setup:</strong> Install bitsandbytes, load a 7B model in 4-bit on Colab T4. Configure LoRA with PEFT. Run a test training loop."},
+     {d:"Fri–Sun",c:"<strong>Dataset curation:</strong> Collect and clean an instruction dataset (200–500 examples) in Alpaca or ShareGPT format. Push to Hugging Face Hub."}],
+     tip:"<strong>Tip:</strong> You can fine-tune a 7B model on a free Colab T4 GPU with QLoRA. No expensive hardware needed to start."},
+    {w:"Week 2",t:"Full fine-tune & evaluation",days:[
+     {d:"Mon–Tue",c:"<strong>SFT with TRL:</strong> Fine-tune Llama 3 8B on your dataset using SFTTrainer. Track loss, gradient norm, and learning rate in W&B."},
+     {d:"Wed–Thu",c:"<strong>Evaluation:</strong> Run on a held-out test set. Compare against the base model. Use BLEU, ROUGE, and human evaluation for final check."},
+     {d:"Fri–Sun",c:"<strong>Merge & publish:</strong> Merge LoRA adapter back into base model. Push to Hugging Face Hub with a model card and a demo."}],
+     tip:"<strong>Goal:</strong> A fine-tuned model on Hugging Face Hub with a model card. Massive credibility signal for employers."}
+   ]},
+  {n:"11",title:"Model Deployment & APIs",desc:"Serve models via FastAPI. Containerise with Docker. Deploy to AWS ECS / GCP Cloud Run. Auth, rate limiting, streaming responses. Production-ready REST API.",
+   tools:["FastAPI","Docker","AWS ECS","GCP Cloud Run","uvicorn","Nginx","APIs"],concepts:["Model Deployment","APIs","Microservices","Containerisation","Serverless","Streaming"],
+   certs:[{l:"AWS — ML Specialty Certification",u:"https://aws.amazon.com/certification/certified-machine-learning-specialty/"},{l:"GCP — Professional ML Engineer",u:"https://cloud.google.com/certification/guides/machine-learning-engineer"}],
+   projects:[{l:"FastAPI LLM endpoint deployed on AWS ECS",u:"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started.html"}],
+   sp:[
+    {w:"Week 1",t:"FastAPI & Docker",days:[
+     {d:"Mon–Tue",c:"<strong>FastAPI:</strong> REST API with Pydantic request/response schemas. Add /health and /predict endpoints. Add streaming (Server-Sent Events) for LLM tokens."},
+     {d:"Wed–Thu",c:"<strong>Docker:</strong> Write a Dockerfile for your FastAPI app. Multi-stage build for a lean production image. Add docker-compose with Redis cache."},
+     {d:"Fri–Sun",c:"<strong>Auth & rate limiting:</strong> API key header auth. Rate limiting with slowapi. Write integration tests with pytest + httpx."}],
+     tip:"<strong>Tip:</strong> Streaming is non-negotiable for LLM APIs. Users will not wait 10 seconds for a full response."},
+    {w:"Week 2",t:"Cloud deployment",days:[
+     {d:"Mon–Tue",c:"<strong>AWS ECR + ECS Fargate:</strong> Push Docker image to ECR. Create ECS task definition and service. Expose via Application Load Balancer."},
+     {d:"Wed–Thu",c:"<strong>Monitoring:</strong> Add CloudWatch logging and alarms. Set up latency, error rate, and cost dashboards."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Your fine-tuned model from Step 10, served as a FastAPI on AWS ECS with auth, streaming, and monitoring. Write a public README."}],
+     tip:"<strong>Goal:</strong> A publicly accessible API endpoint with a README explaining how to call it. Ship it."}
+   ]}
+ ]},
+ {title:"MLOps, Docker & Kubernetes",time:"4–6 wks",badge:"Scale",dot:"#818cf8",bb:"rgba(129,140,248,.1)",bc:"#a5b4fc",steps:[
+  {n:"12",title:"MLOps Pipelines",desc:"Automate training, evaluation, deployment. Version data and models with DVC. Monitor for drift, latency, cost. CI/CD pipelines for ML with GitHub Actions.",
+   tools:["MLflow","DVC","W&B","GitHub Actions","Prefect","Airflow","AWS","GCP"],concepts:["MLOps","Model monitoring","Data versioning","CI/CD for ML","Experiment tracking","Model drift"],
+   certs:[{l:"MLOps Zoomcamp — DataTalks.Club (free)",u:"https://github.com/DataTalksClub/mlops-zoomcamp"},{l:"DeepLearning.AI — MLOps Specialization (Coursera)",u:"https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops"}],
+   projects:[{l:"End-to-end ML pipeline with MLflow + DVC",u:"https://mlflow.org/docs/latest/tutorials-and-examples/"}],
+   sp:[
+    {w:"Week 1",t:"Experiment tracking & versioning",days:[
+     {d:"Mon–Tue",c:"<strong>MLflow:</strong> Log parameters, metrics, and artifacts. Compare runs in the MLflow UI. Register a model in the MLflow Model Registry."},
+     {d:"Wed–Thu",c:"<strong>DVC:</strong> Version training data and model artifacts with DVC + S3. Run dvc repro — pipeline stages re-run only when inputs change."},
+     {d:"Fri–Sun",c:"<strong>W&B sweeps:</strong> Hyperparameter sweep with Bayesian optimisation. Visualise the Pareto frontier of model size vs accuracy."}],
+     tip:"<strong>Tip:</strong> MLOps tools feel like overhead until your first model breaks silently in production. Then you will wish you had them."},
+    {w:"Week 2",t:"CI/CD & monitoring",days:[
+     {d:"Mon–Tue",c:"<strong>GitHub Actions:</strong> Workflow that runs tests, trains the model, evaluates it, and deploys only if accuracy exceeds a threshold."},
+     {d:"Wed–Thu",c:"<strong>Model monitoring:</strong> Evidently AI for data drift and model degradation. Slack alert when drift score exceeds threshold."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Fully automated pipeline — data ingestion → feature engineering → training → evaluation → deployment. All triggered by a git push."}],
+     tip:"<strong>Goal:</strong> A fully automated ML pipeline that can retrain and redeploy without a single manual step."}
+   ]},
+  {n:"13",title:"Docker, Kubernetes & Distributed Systems",desc:"Containerise every service. Orchestrate with Kubernetes. Fault tolerance, load balancing, service mesh. Distributed training with Ray or Horovod.",
+   tools:["Docker","Kubernetes","AWS EKS","GCP GKE","Ray","Horovod","Helm"],concepts:["Distributed Systems","Kubernetes","Microservices","Horizontal scaling","Service mesh","Fault tolerance"],
+   certs:[{l:"CKAD — Certified Kubernetes App Developer",u:"https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/"},{l:"Docker Mastery (Udemy)",u:"https://www.udemy.com/course/docker-mastery/"}],
+   projects:[{l:"K8s-deployed RAG app with autoscaling",u:"https://kubernetes.io/docs/tutorials/"}],
+   sp:[
+    {w:"Week 1",t:"Docker advanced & Kubernetes basics",days:[
+     {d:"Mon–Tue",c:"<strong>Docker advanced:</strong> Multi-stage builds, layer caching, .dockerignore, docker-compose for local dev. Build a lean production image under 500MB."},
+     {d:"Wed–Thu",c:"<strong>Kubernetes intro:</strong> Pods, Deployments, Services, ConfigMaps, Secrets. Deploy FastAPI model server to a local k8s cluster (minikube or kind)."},
+     {d:"Fri–Sun",c:"<strong>K8s networking:</strong> ClusterIP, NodePort, Ingress. Set up NGINX Ingress Controller. Add TLS with cert-manager."}],
+     tip:"<strong>Tip:</strong> Use minikube locally first. Never start with a cloud cluster — the cost will surprise you."},
+    {w:"Week 2",t:"Scaling & distributed training",days:[
+     {d:"Mon–Tue",c:"<strong>HPA & autoscaling:</strong> Configure Horizontal Pod Autoscaler based on CPU and custom metrics. Load-test with k6."},
+     {d:"Wed–Thu",c:"<strong>Distributed training with Ray:</strong> Set up a Ray cluster. Distribute a PyTorch training job across 2 simulated nodes. Understand data parallelism."},
+     {d:"Fri–Sun",c:"<strong>Project:</strong> Complete RAG application (API + vector DB + model) deployed to Kubernetes with HPA and health checks."}],
+     tip:"<strong>Goal:</strong> Your app should handle a 10x traffic spike automatically via HPA without manual intervention."}
+   ]}
+ ]},
+ {title:"Specialise & Ship",time:"Ongoing",badge:"Level Up",dot:"#a3e635",bb:"rgba(163,230,53,.1)",bc:"#bef264",steps:[
+  {n:"14",title:"Pick a Specialisation",desc:"Go deep on one vertical: multimodal AI, voice agents, code generation, enterprise RAG, or AI safety. Follow arXiv and replicate key papers.",
+   tools:["Whisper","GPT-4o Vision","Codestral","ElevenLabs","Stable Diffusion"],concepts:["Multimodal LLMs","Voice AI","Code LLMs","AI safety","Alignment"],
+   certs:[{l:"DeepLearning.AI — Short Courses Library (free)",u:"https://www.deeplearning.ai/short-courses/"}],
+   projects:[],
+   sp:[
+    {w:"Week 1–2",t:"Choose your path & go deep",days:[
+     {d:"Multimodal",c:"<strong>Vision + Text:</strong> Build an image captioning and VQA system with GPT-4o Vision. Try open-source alternatives (LLaVA, Idefics)."},
+     {d:"Voice AI",c:"<strong>Voice Agents:</strong> Transcribe with Whisper → process with LLM → respond with ElevenLabs TTS. Build a real-time voice assistant."},
+     {d:"Code AI",c:"<strong>Code Generation:</strong> Fine-tune Codestral or DeepSeek Coder on your codebase. Build an IDE plugin. Study HumanEval benchmarks."},
+     {d:"Enterprise RAG",c:"<strong>Enterprise RAG:</strong> Multi-tenant RAG with access control, document permissions, audit logging, and multi-modal document parsing."}],
+     tip:"<strong>Tip:</strong> Pick the specialisation closest to the job you want. Multimodal for product companies, Enterprise RAG for consulting and B2B."},
+    {w:"Week 3–4",t:"Replicate a paper & contribute",days:[
+     {d:"arXiv",c:"<strong>Paper replication:</strong> Pick one recent paper in your specialisation (last 6 months). Read it carefully, then replicate the core experiment."},
+     {d:"Write",c:"<strong>Blog post:</strong> Document your replication on Medium or your personal blog. Explain what you learned and what differed from the paper."},
+     {d:"Open source",c:"<strong>Contribute:</strong> Find an open-source project in your specialisation with 'good first issue' tags. Make a meaningful contribution."}],
+     tip:"<strong>Goal:</strong> One paper replicated, one blog post published, one open-source contribution merged."}
+   ]},
+  {n:"15",title:"Build in Public & Get Hired",desc:"Ship a full end-to-end GenAI app. Write teardowns on LinkedIn or X. Contribute to open-source. Your GitHub is your most valuable CV.",
+   tools:["Hugging Face Spaces","Vercel","GitHub","Streamlit","Gradio"],concepts:["Portfolio building","Open source","Technical writing","System design","Interview prep"],
+   certs:[{l:"GCP — Professional Data Engineer",u:"https://cloud.google.com/certification/guides/professional-data-engineer"},{l:"AWS — Solutions Architect Associate",u:"https://aws.amazon.com/certification/certified-solutions-architect-associate/"}],
+   projects:[{l:"End-to-end GenAI SaaS app (Gradio tutorial)",u:"https://www.gradio.app/guides/creating-a-chatbot-fast"},{l:"Contribute to LangChain on GitHub",u:"https://github.com/langchain-ai/langchain/blob/master/CONTRIBUTING.md"}],
+   sp:[
+    {w:"Week 1–2",t:"Ship your flagship project",days:[
+     {d:"Design",c:"<strong>Pick a real problem:</strong> Not a toy dataset. A problem someone would pay to solve. Define the user, the input, and the output clearly."},
+     {d:"Build",c:"<strong>Full stack:</strong> FastAPI backend + React or Streamlit frontend + your AI pipeline. Deploy to Vercel (frontend) + AWS/GCP (backend)."},
+     {d:"Polish",c:"<strong>Production quality:</strong> Error handling, loading states, rate limiting, a README with architecture diagram and demo GIF."}],
+     tip:"<strong>Tip:</strong> One polished deployed project beats five half-finished Jupyter notebooks. Quality over quantity."},
+    {w:"Week 3–4",t:"Presence & interview prep",days:[
+     {d:"LinkedIn",c:"<strong>Post weekly:</strong> Write a short teardown of something you built or learned. Tag tools you used. Consistency beats virality."},
+     {d:"Interviews",c:"<strong>ML system design:</strong> Practice designing an ML system end-to-end (data → training → serving → monitoring). Study ML System Design by Chip Huyen."},
+     {d:"Network",c:"<strong>Cold outreach:</strong> Message 5 AI engineers per week on LinkedIn. Ask a specific question about their work, not 'can I get a referral'."}],
+     tip:"<strong>Goal:</strong> A deployed app, 10 LinkedIn posts, and 3 conversations with AI engineers at target companies."}
+   ]}
+ ]}
+];
+
+let done=new Set();
+function upd(){const p=Math.round(done.size/D.length*100);document.getElementById('pfill').style.width=p+'%';document.getElementById('ppct').textContent=p+'%'}
+function tog(i){document.getElementById('p'+i).classList.toggle('open')}
+function togDone(i,btn,e){e.stopPropagation();if(done.has(i)){done.delete(i);btn.classList.remove('done');btn.textContent='Mark done'}else{done.add(i);btn.classList.add('done');btn.textContent='Done ✓'}upd()}
+function togSp(id,ic){const el=document.getElementById(id);const tog=el.previousElementSibling;el.classList.toggle('open');tog.classList.toggle('open')}
+
+function buildSp(sp){
+  return sp.map(w=>`<div class="sp-week">
+    <div class="sp-wh"><span class="sp-wl">${w.w}</span><span class="sp-wt">${w.t}</span></div>
+    <div class="sp-wb">${w.days.map(d=>`<div class="sp-day"><span class="sp-dl">${d.d}</span><span class="sp-dc">${d.c}</span></div>`).join('')}</div>
+    ${w.tip?`<div class="sp-tip">${w.tip}</div>`:''}
+  </div>`).join('');
+}
+
+function build(){
+  const c=document.getElementById('phases');
+  D.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.className='phase'+(i===0?' open':'');
+    div.id='p'+i;
+    const sh=p.steps.map((s,si)=>{
+      const uid=`sp${i}_${si}`;
+      const tl=s.tools.map(t=>`<span class="tag tool">${t}</span>`).join('');
+      const cl=s.concepts.map(c=>`<span class="tag concept">${c}</span>`).join('');
+      const ce=s.certs.map(c=>`<div class="lr"><span class="lt">cert</span><a href="${c.u}" target="_blank" rel="noopener">${c.l}</a></div>`).join('');
+      const pr=s.projects.map(r=>`<div class="lr"><span class="lt">project</span><a href="${r.u}" target="_blank" rel="noopener">${r.l}</a></div>`).join('');
+      const spHtml=s.sp?buildSp(s.sp):'';
+      return `<div class="step">
+        <div class="step-main">
+          <div class="sh"><div class="snum" style="background:${p.bb};color:${p.bc}">${s.n}</div><div class="stitle">${s.title}</div></div>
+          <div class="sdesc">${s.desc}</div>
+          <div class="tags">${tl}${cl}</div>
+          ${ce||pr?`<div class="links-s">${ce}${pr}</div>`:''}
+        </div>
+        ${spHtml?`<div class="sp-toggle" onclick="togSp('${uid}','ic${uid}')"><span class="sp-toggle-lbl">Weekly study plan</span><span class="sp-chev" id="ic${uid}">▼</span></div><div class="sp-body" id="${uid}"><div class="sp-inner">${spHtml}</div></div>`:''}
+      </div>`;
+    }).join('');
+    div.innerHTML=`
+      <div class="pdot" style="background:${p.dot}"></div>
+      <div class="pcard">
+        <div class="ph" onclick="tog(${i})">
+          <span class="ph-num">0${i+1}</span>
+          <span class="ph-badge" style="background:${p.bb};color:${p.bc}">${p.badge}</span>
+          <span class="ph-title">${p.title}</span>
+          <span class="ph-time">${p.time}</span>
+          <button class="done-btn" onclick="togDone(${i},this,event)">Mark done</button>
+          <span class="chev">▼</span>
+        </div>
+        <div class="pbody">${sh}</div>
+      </div>`;
+    c.appendChild(div);
+  });
+  upd();
+}
+build();
+</script>
+</body>
+</html>
